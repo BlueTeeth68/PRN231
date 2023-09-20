@@ -3,13 +3,13 @@ using Microsoft.Extensions.Configuration;
 
 namespace DataAccess.Models
 {
-    public partial class FUCarRentingManagementContext : DbContext
+    public partial class AppDbContext : DbContext
     {
-        public FUCarRentingManagementContext()
+        public AppDbContext()
         {
         }
 
-        public FUCarRentingManagementContext(DbContextOptions<FUCarRentingManagementContext> options)
+        public AppDbContext(DbContextOptions<AppDbContext> options)
             : base(options)
         {
         }
