@@ -8,27 +8,25 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="9ad24fac-ec1c-4d78-9d8b-52bf95c3a0be" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/.idea.DaoMinhTri_NET1606_A01/.idea/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/.idea.DaoMinhTri_NET1606_A01/.idea/aws.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/.idea.DaoMinhTri_NET1606_A01/.idea/encodings.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/.idea.DaoMinhTri_NET1606_A01/.idea/indexLayout.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/.idea.DaoMinhTri_NET1606_A01/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/DataAccess/Repositories/Implements/BaseRepository.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/DataAccess/Repositories/Interfaces/IBaseRepository.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/DataAccess/Repositories/Interfaces/ICarInformationRepository.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/DataAccess/Repositories/Interfaces/ICustomerRepositories.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/DataAccess/Repositories/Interfaces/IManufacturerRepository.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/DataAccess/Repositories/Interfaces/IRentingDetailRepository.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/DataAccess/Repositories/Interfaces/IRentingTransactionRepository.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/DataAccess/Repositories/Interfaces/ISupplierRepository.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.CarRentingManagement/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.CarRentingManagement/.idea/encodings.xml" beforeDir="false" />
+    <list default="true" id="9ad24fac-ec1c-4d78-9d8b-52bf95c3a0be" name="Changes" comment="Add Repository; implement Unit of work pattern">
+      <change afterPath="$PROJECT_DIR$/API/Controllers/CustomerController.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/BusinessLogic/DTOs/Request/User/LoginUserRequest.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/BusinessLogic/DTOs/Request/User/RegisterUserRequest.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/BusinessLogic/DTOs/Response/User/LoginUserResponse.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/BusinessLogic/DependencyInjection.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/BusinessLogic/Mapper/UserMappingProfile.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/BusinessLogic/Services/Implements/CustomerServices.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/BusinessLogic/Services/Interfaces/ICustomerServices.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.CarRentingManagement/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.CarRentingManagement/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/API/API.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/API/API.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/API/Controllers/WeatherForecastController.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/API/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/API/Program.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/API/WeatherForecast.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/API/appsettings.json" beforeDir="false" afterPath="$PROJECT_DIR$/API/appsettings.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/BusinessLogic/BusinessLogic.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/BusinessLogic/BusinessLogic.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CarRentingManagement.sln" beforeDir="false" afterPath="$PROJECT_DIR$/DaoMinhTri_NET1606_A01.sln" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/DataAccess/DataAccess.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/DataAccess/DataAccess.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/DataAccess/Models/FUCarRentingManagementContext.cs" beforeDir="false" afterPath="$PROJECT_DIR$/DataAccess/Models/AppDbContext.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DataAccess/Repositories/Implements/CustomerRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/DataAccess/Repositories/Implements/CustomerRepository.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DataAccess/Repositories/Interfaces/ICustomerRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/DataAccess/Repositories/Interfaces/ICustomerRepository.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -114,8 +112,17 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1695182617197</updated>
-      <workItem from="1695182618201" duration="1487000" />
+      <workItem from="1695182618201" duration="9468000" />
     </task>
+    <task id="LOCAL-00001" summary="Add Repository; implement Unit of work pattern">
+      <option name="closed" value="true" />
+      <created>1695205709764</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1695205709764</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -125,5 +132,7 @@
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
+    <MESSAGE value="Add Repository; implement Unit of work pattern" />
+    <option name="LAST_COMMIT_MESSAGE" value="Add Repository; implement Unit of work pattern" />
   </component>
 </project>
