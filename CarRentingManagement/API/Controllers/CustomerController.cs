@@ -55,14 +55,15 @@ public class CustomerController : ControllerBase
     }
 
     [HttpGet()]
-    public async Task<ActionResult<List<UserResponse>>> GetAllAsync()
+    public async Task<ActionResult<List<UserResponse>>> GetAllAsync([FromQuery] string? name)
     {
-        var users = await _customerServices.GetAllAsync();
-        return Ok(users);
+        if (name == null || name.Trim().Equals(""))
+            return Ok(await _customerServices.GetAllAsync());
+        return Ok(await _customerServices.GetByNameAscAsync(name));
     }
-
+    
     [HttpPut("{id}")]
-    public async Task<ActionResult> UpdateAsync( int id, [FromBody] UpdateUserRequest request)
+    public async Task<ActionResult> UpdateAsync(int id, [FromBody] UpdateUserRequest request)
     {
         var result = await _customerServices.UpdateAsync(id, request);
         if (result < 0)
@@ -72,8 +73,6 @@ public class CustomerController : ControllerBase
 
         return Ok("Update success.");
     }
-    
-    //Search by full name
-    
+
     //Delete
 }

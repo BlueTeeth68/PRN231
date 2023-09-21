@@ -12,10 +12,10 @@ namespace BusinessLogic.Services.Implements;
 public class CarInformationService : ICarInformationService
 {
     private readonly IUnitOfWork _unitOfWork;
-    private readonly ILogger<CustomerServices> _logger;
+    private readonly ILogger<CustomerService> _logger;
     private readonly IMapper _mapper;
 
-    public CarInformationService(IUnitOfWork unitOfWork, ILogger<CustomerServices> logger, IMapper mapper)
+    public CarInformationService(IUnitOfWork unitOfWork, ILogger<CustomerService> logger, IMapper mapper)
     {
         _unitOfWork = unitOfWork;
         _logger = logger;
@@ -99,5 +99,12 @@ public class CarInformationService : ICarInformationService
         _unitOfWork.CarInformationRepository.Update(existingCar);
         var result = await _unitOfWork.SaveChangeAsync();
         return result > 0;
+    }
+
+    public async Task<List<CarInformationResponse>> SearchByNameAsync(string name)
+    {
+        var cars = await _unitOfWork.CarInformationRepository.SearchByNameAsync(name);
+        var result = _mapper.Map<List<CarInformationResponse>>(cars);
+        return result;
     }
 }

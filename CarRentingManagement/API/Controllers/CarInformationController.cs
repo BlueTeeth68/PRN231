@@ -33,10 +33,11 @@ public class CarInformationController : ControllerBase
     }
 
     [HttpGet]
-    public async Task<ActionResult<List<CarInformationResponse>>> GetAllAsync()
+    public async Task<ActionResult<List<CarInformationResponse>>> SearchByNameAsync([FromQuery] string? name)
     {
-        var cars = await _carInformationService.GetAllAsync();
-        return Ok(cars);
+        if (name == null || name.Trim() == "")
+            return Ok(await _carInformationService.GetAllAsync());
+        return Ok(await _carInformationService.SearchByNameAsync(name));
     }
 
     [HttpPost]
@@ -46,7 +47,7 @@ public class CarInformationController : ControllerBase
         var car = await _carInformationService.CreateNewAsync(request);
         if (car == null)
         {
-            throw new  BadRequestException("Can not create this car information.");
+            throw new BadRequestException("Can not create this car information.");
         }
 
         return Ok(car);
@@ -63,5 +64,4 @@ public class CarInformationController : ControllerBase
 
         throw new BadRequestException("Error when update car.");
     }
-    
 }

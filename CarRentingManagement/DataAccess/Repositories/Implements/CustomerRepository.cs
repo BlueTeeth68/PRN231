@@ -5,7 +5,7 @@ using Microsoft.Extensions.Logging;
 
 namespace DataAccess.Repositories.Implements;
 
-public class CustomerRepository:BaseRepository<Customer>,ICustomerRepository
+public class CustomerRepository : BaseRepository<Customer>, ICustomerRepository
 {
     public CustomerRepository(AppDbContext context, ILogger<BaseRepository<Customer>> logger) : base(context, logger)
     {
@@ -31,6 +31,16 @@ public class CustomerRepository:BaseRepository<Customer>,ICustomerRepository
             if (password.Equals(customer.Password))
                 return customer;
         }
+
         return null;
+    }
+
+    public async Task<List<Customer>> GetCustomerByNameAscAsync(string name)
+    {
+        var nameNormalize = name.Trim().ToLower();
+
+        var result = await _dbSet.Where(c => c.CustomerName != null && c.CustomerName.ToLower().Equals(nameNormalize))
+            .OrderBy(c => c.CustomerName).ToListAsync();
+        return result;
     }
 }

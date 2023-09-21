@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using BusinessLogic.DTOs.Request.User;
 using BusinessLogic.DTOs.Response.User;
+using BusinessLogic.ErrorHandlers;
 using BusinessLogic.Services.Interfaces;
 using DataAccess.Models;
 using DataAccess.UnitOfWork.Interfaces;
@@ -8,13 +9,13 @@ using Microsoft.Extensions.Logging;
 
 namespace BusinessLogic.Services.Implements;
 
-public class CustomerServices : ICustomerServices
+public class CustomerService : ICustomerServices
 {
     private readonly IUnitOfWork _unitOfWork;
-    private readonly ILogger<CustomerServices> _logger;
+    private readonly ILogger<CustomerService> _logger;
     private readonly IMapper _mapper;
 
-    public CustomerServices(IUnitOfWork unitOfWork, ILogger<CustomerServices> logger, IMapper mapper)
+    public CustomerService(IUnitOfWork unitOfWork, ILogger<CustomerService> logger, IMapper mapper)
     {
         _unitOfWork = unitOfWork;
         _logger = logger;
@@ -102,5 +103,30 @@ public class CustomerServices : ICustomerServices
         _unitOfWork.CustomerRepository.Update(user);
         var result = await _unitOfWork.SaveChangeAsync();
         return result;
+    }
+
+    public async Task<bool> ChangePasswordAsync(int id, UpdatePasswordRequest request)
+    {
+        var user = await _unitOfWork.CustomerRepository.GetByIdAsync(id);
+        if (user == null)
+        {
+            throw new NotFoundException($"User {id} does not exist.");
+        }
+
+        if (!user.Password.Equals(request.OldPassword))
+        {
+            throw new BadRequestException("Password is incorrect.");
+        }
+
+        user.Password = request.NewPassword;
+        _unitOfWork.CustomerRepository.Update(user);
+        var result = await _unitOfWork.SaveChangeAsync();
+        return result > 0;
+    }
+
+    public async Task<List<UserResponse>> GetByNameAscAsync(string name)
+    {
+        var customerObjs = await _unitOfWork.CustomerRepository.GetCustomerByNameAscAsync(name);
+        return _mapper.Map<List<UserResponse>>(customerObjs);
     }
 }

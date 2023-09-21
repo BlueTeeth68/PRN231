@@ -11,4 +11,5 @@ public interface ICarInformationService
     public Task<List<CarInformation>> GetAllAsync();
     public Task<CarInformationResponse?> CreateNewAsync(CreateCarInformationRequest request);
     public Task<bool> UpdateAsync(int id, UpdateCarInformationRequest request);
+    public Task<List<CarInformationResponse>> SearchByNameAsync(string name);
 }
