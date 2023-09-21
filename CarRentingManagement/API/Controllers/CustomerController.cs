@@ -7,7 +7,7 @@ namespace API.Controllers;
 
 [ApiController]
 [Route("api/customers")]
-public class CustomerController:ControllerBase
+public class CustomerController : ControllerBase
 {
     private readonly ICustomerServices _customerServices;
     private readonly ILogger<CustomerController> _logger;
@@ -19,7 +19,7 @@ public class CustomerController:ControllerBase
     }
 
     [HttpPost("authenticate/register")]
-    public async Task<ActionResult<LoginUserResponse>> RegisterAsync([FromBody] RegisterUserRequest request)
+    public async Task<ActionResult<UserResponse>> RegisterAsync([FromBody] RegisterUserRequest request)
     {
         var returnCustomer = await _customerServices.RegisterAsync(request);
         if (returnCustomer == null)
@@ -31,7 +31,7 @@ public class CustomerController:ControllerBase
     }
 
     [HttpPost("authenticate/login")]
-    public async Task<ActionResult<LoginUserResponse>> LoginAsync([FromBody] LoginUserRequest request)
+    public async Task<ActionResult<UserResponse>> LoginAsync([FromBody] LoginUserRequest request)
     {
         var returnCustomer = await _customerServices.LoginAsync(request);
         if (returnCustomer == null)
@@ -41,5 +41,39 @@ public class CustomerController:ControllerBase
 
         return Ok(returnCustomer);
     }
+
+    [HttpGet("{id}")]
+    public async Task<ActionResult<UserResponse>> GetByIdAsync(int id)
+    {
+        var user = await _customerServices.GetByIdAsync(id);
+        if (user == null)
+        {
+            return NotFound($"User {id} does not exist.");
+        }
+
+        return Ok(user);
+    }
+
+    [HttpGet()]
+    public async Task<ActionResult<List<UserResponse>>> GetAllAsync()
+    {
+        var users = await _customerServices.GetAllAsync();
+        return Ok(users);
+    }
+
+    [HttpPut("{id}")]
+    public async Task<ActionResult> UpdateAsync( int id, [FromBody] UpdateUserRequest request)
+    {
+        var result = await _customerServices.UpdateAsync(id, request);
+        if (result < 0)
+        {
+            return BadRequest("Error when update user. Recheck information.");
+        }
+
+        return Ok("Update success.");
+    }
     
+    //Search by full name
+    
+    //Delete
 }

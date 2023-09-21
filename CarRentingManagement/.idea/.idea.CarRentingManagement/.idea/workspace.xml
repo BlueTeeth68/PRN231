@@ -8,25 +8,24 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="9ad24fac-ec1c-4d78-9d8b-52bf95c3a0be" name="Changes" comment="Add Repository; implement Unit of work pattern">
-      <change afterPath="$PROJECT_DIR$/API/Controllers/CustomerController.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/BusinessLogic/DTOs/Request/User/LoginUserRequest.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/BusinessLogic/DTOs/Request/User/RegisterUserRequest.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/BusinessLogic/DTOs/Response/User/LoginUserResponse.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/BusinessLogic/DependencyInjection.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/BusinessLogic/Mapper/UserMappingProfile.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/BusinessLogic/Services/Implements/CustomerServices.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/BusinessLogic/Services/Interfaces/ICustomerServices.cs" afterDir="false" />
+    <list default="true" id="9ad24fac-ec1c-4d78-9d8b-52bf95c3a0be" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/API/Controllers/CarInformationController.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/API/Controllers/TransactionController.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/BusinessLogic/DTOs/Request/CarInformation/CreateCarInformationRequest.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/BusinessLogic/DTOs/Request/CarInformation/UpdateCarInformationRequest.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/BusinessLogic/DTOs/Request/User/UpdateUserRequest.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/BusinessLogic/DTOs/Response/CarInformation/CarInformationResponse.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/BusinessLogic/Mapper/CarInformationMappingProfile.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/BusinessLogic/Services/Implements/CarInformationService.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/BusinessLogic/Services/Interfaces/ICarInformationService.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.CarRentingManagement/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.CarRentingManagement/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/API/API.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/API/API.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/API/Controllers/WeatherForecastController.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/API/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/API/Program.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/API/WeatherForecast.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/API/appsettings.json" beforeDir="false" afterPath="$PROJECT_DIR$/API/appsettings.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/API/Controllers/CustomerController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/API/Controllers/CustomerController.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/BusinessLogic/BusinessLogic.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/BusinessLogic/BusinessLogic.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/DataAccess/DataAccess.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/DataAccess/DataAccess.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/DataAccess/Repositories/Implements/CustomerRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/DataAccess/Repositories/Implements/CustomerRepository.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/DataAccess/Repositories/Interfaces/ICustomerRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/DataAccess/Repositories/Interfaces/ICustomerRepository.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BusinessLogic/DTOs/Response/User/LoginUserResponse.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BusinessLogic/DTOs/Response/User/UserResponse.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BusinessLogic/DependencyInjection.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BusinessLogic/DependencyInjection.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BusinessLogic/Mapper/UserMappingProfile.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BusinessLogic/Mapper/UserMappingProfile.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BusinessLogic/Services/Implements/CustomerServices.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BusinessLogic/Services/Implements/CustomerServices.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BusinessLogic/Services/Interfaces/ICustomerServices.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BusinessLogic/Services/Interfaces/ICustomerServices.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -112,7 +111,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1695182617197</updated>
-      <workItem from="1695182618201" duration="9468000" />
+      <workItem from="1695182618201" duration="17505000" />
     </task>
     <task id="LOCAL-00001" summary="Add Repository; implement Unit of work pattern">
       <option name="closed" value="true" />
@@ -122,7 +121,15 @@
       <option name="project" value="LOCAL" />
       <updated>1695205709764</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="Add Login and register controller">
+      <option name="closed" value="true" />
+      <created>1695221355466</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1695221355466</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -133,6 +140,7 @@
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
     <MESSAGE value="Add Repository; implement Unit of work pattern" />
-    <option name="LAST_COMMIT_MESSAGE" value="Add Repository; implement Unit of work pattern" />
+    <MESSAGE value="Add Login and register controller" />
+    <option name="LAST_COMMIT_MESSAGE" value="Add Login and register controller" />
   </component>
 </project>

@@ -29,9 +29,11 @@ public static class DependencyInjection
         //Add Services
         services.AddScoped<ICustomerServices, CustomerServices>();
         services.AddScoped<IUnitOfWork, UnitOfWork>();
+        services.AddScoped<ICarInformationService, CarInformationService>();
 
         //Add Mapper
         services.AddAutoMapper(typeof(UserMappingProfile));
+        services.AddAutoMapper(typeof(CarInformationMappingProfile));
         return services;
     }
 }

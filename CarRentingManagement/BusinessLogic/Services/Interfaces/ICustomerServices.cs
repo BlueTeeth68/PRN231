@@ -5,6 +5,9 @@ namespace BusinessLogic.Services.Interfaces;
 
 public interface ICustomerServices
 {
-    Task<LoginUserResponse?> RegisterAsync(RegisterUserRequest request);
-    Task<LoginUserResponse?> LoginAsync(LoginUserRequest request);
+    Task<UserResponse?> RegisterAsync(RegisterUserRequest request);
+    Task<UserResponse?> LoginAsync(LoginUserRequest request);
+    Task<UserResponse?> GetByIdAsync(int id);
+    Task<List<UserResponse>> GetAllAsync();
+    Task<int> UpdateAsync(int id, UpdateUserRequest request);
 }

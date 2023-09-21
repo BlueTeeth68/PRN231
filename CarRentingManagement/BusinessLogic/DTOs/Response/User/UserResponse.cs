@@ -1,6 +1,6 @@
 ﻿namespace BusinessLogic.DTOs.Response.User;
 
-public class LoginUserResponse
+public class UserResponse
 {
     public int CustomerId { get; set; }
     public string? CustomerName { get; set; }

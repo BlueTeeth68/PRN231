@@ -21,7 +21,7 @@ public class CustomerServices : ICustomerServices
         _mapper = mapper;
     }
 
-    public async Task<LoginUserResponse?> RegisterAsync(RegisterUserRequest request)
+    public async Task<UserResponse?> RegisterAsync(RegisterUserRequest request)
     {
         if (await _unitOfWork.CustomerRepository.ExistsByEmailAsync(request.Email))
         {
@@ -34,14 +34,14 @@ public class CustomerServices : ICustomerServices
         if (success > 0)
         {
             var createdCustomer = await _unitOfWork.CustomerRepository.GetByIdAsync(customerObj.CustomerId);
-            var result = _mapper.Map<LoginUserResponse>(createdCustomer);
+            var result = _mapper.Map<UserResponse>(createdCustomer);
             return result;
         }
 
         return null;
     }
 
-    public async Task<LoginUserResponse?> LoginAsync(LoginUserRequest request)
+    public async Task<UserResponse?> LoginAsync(LoginUserRequest request)
     {
         var customerObj =
             await _unitOfWork.CustomerRepository.GetByEmailAndPasswordAsync(request.Email, request.Password);
@@ -50,7 +50,57 @@ public class CustomerServices : ICustomerServices
             return null;
         }
 
-        var result = _mapper.Map<LoginUserResponse>(customerObj);
+        var result = _mapper.Map<UserResponse>(customerObj);
+        return result;
+    }
+
+    public async Task<UserResponse?> GetByIdAsync(int id)
+    {
+        var user = await _unitOfWork.CustomerRepository.GetByIdAsync(id);
+        var result = _mapper.Map<UserResponse>(user);
+        return result;
+    }
+
+    public async Task<List<UserResponse>> GetAllAsync()
+    {
+        var users = await _unitOfWork.CustomerRepository.GetAllAsync();
+        var result = _mapper.Map<List<UserResponse>>(users);
+        return result;
+    }
+
+    public async Task<int> UpdateAsync(int id, UpdateUserRequest request)
+    {
+        var user = await _unitOfWork.CustomerRepository.GetByIdAsync(id);
+        if (user == null)
+        {
+            return -1;
+        }
+
+        if (request.Email != null)
+        {
+            var isExist = await _unitOfWork.CustomerRepository.ExistsByEmailAsync(request.Email);
+            if (isExist)
+                return -1;
+            user.Email = request.Email;
+        }
+
+        if (request.Telephone != null)
+        {
+            user.Telephone = request.Telephone;
+        }
+
+        if (request.CustomerName != null)
+        {
+            user.CustomerName = request.CustomerName;
+        }
+
+        if (request.CustomerBirthday != null)
+        {
+            user.CustomerBirthday = request.CustomerBirthday;
+        }
+
+        _unitOfWork.CustomerRepository.Update(user);
+        var result = await _unitOfWork.SaveChangeAsync();
         return result;
     }
 }

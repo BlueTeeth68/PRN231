@@ -12,6 +12,6 @@ public class UserMappingProfile : Profile
         CreateMap<RegisterUserRequest, Customer>()
             .ForMember(dest => dest.CustomerStatus, src => src.MapFrom(src => 1));
 
-        CreateMap<Customer, LoginUserResponse>();
+        CreateMap<Customer, UserResponse>();
     }
 }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Text.Json.Serialization;
 
 namespace DataAccess.Models
 {
@@ -15,6 +16,7 @@ namespace DataAccess.Models
         public string? SupplierDescription { get; set; }
         public string? SupplierAddress { get; set; }
 
+        [JsonIgnore]
         public virtual ICollection<CarInformation> CarInformations { get; set; }
     }
 }
