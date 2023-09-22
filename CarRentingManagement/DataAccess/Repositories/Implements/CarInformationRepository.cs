@@ -19,4 +19,11 @@ public class CarInformationRepository : BaseRepository<CarInformation>, ICarInfo
             .OrderBy(c => c.CarName).ToListAsync();
         return result;
     }
+
+    public async Task<List<CarInformation>> GetAllAsync()
+    {
+        return await _dbSet.Include(c => c.Manufacturer)
+            .Include(c => c.Supplier)
+            .ToListAsync();
+    }
 }

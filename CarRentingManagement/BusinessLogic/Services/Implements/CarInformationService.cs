@@ -29,10 +29,10 @@ public class CarInformationService : ICarInformationService
         return result;
     }
 
-    public async Task<List<CarInformation>> GetAllAsync()
+    public async Task<List<CarInformationResponse>> GetAllAsync()
     {
         var cars = await _unitOfWork.CarInformationRepository.GetAllAsync();
-        var result = _mapper.Map<List<CarInformation>>(cars);
+        var result = _mapper.Map<List<CarInformationResponse>>(cars);
         return result;
     }
 

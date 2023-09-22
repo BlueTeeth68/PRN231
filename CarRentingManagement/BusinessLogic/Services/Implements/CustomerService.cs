@@ -69,20 +69,23 @@ public class CustomerService : ICustomerServices
         return result;
     }
 
-    public async Task<int> UpdateAsync(int id, UpdateUserRequest request)
+    public async Task<bool> UpdateAsync(int id, UpdateUserRequest request)
     {
         var user = await _unitOfWork.CustomerRepository.GetByIdAsync(id);
         if (user == null)
         {
-            return -1;
+            throw new BadRequestException($"User {id} does not exist.");
         }
 
         if (request.Email != null)
         {
-            var isExist = await _unitOfWork.CustomerRepository.ExistsByEmailAsync(request.Email);
-            if (isExist)
-                return -1;
-            user.Email = request.Email;
+            if (!request.Email.Trim().ToLower().Equals(user.Email.Trim().ToLower()))
+            {
+                var isExist = await _unitOfWork.CustomerRepository.ExistsByEmailAsync(request.Email);
+                if (isExist)
+                    throw new ConflictException($"Email {request.Email} has been existed.");
+                user.Email = request.Email;
+            }
         }
 
         if (request.Telephone != null)
@@ -102,7 +105,7 @@ public class CustomerService : ICustomerServices
 
         _unitOfWork.CustomerRepository.Update(user);
         var result = await _unitOfWork.SaveChangeAsync();
-        return result;
+        return result > 0;
     }
 
     public async Task<bool> ChangePasswordAsync(int id, UpdatePasswordRequest request)

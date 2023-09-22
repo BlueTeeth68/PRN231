@@ -12,5 +12,7 @@ public class CarInformationMappingProfile : Profile
         CreateMap<CreateCarInformationRequest, CarInformation>()
             .ForMember(dest => dest.CarStatus, src => src.MapFrom(src => 1));
         CreateMap<CarInformation, CarInformationResponse>();
+        CreateMap<Manufacturer, ManufacturerResponse>();
+        CreateMap<Supplier, SupplierResponse>();
     }
 }

@@ -6,6 +6,6 @@ public class UserResponse
     public string? CustomerName { get; set; }
     public string? Telephone { get; set; }
     public string Email { get; set; } = null!;
-    public DateTime? CustomerBirthday { get; set; }
+    public string? CustomerBirthday { get; set; }
     public byte? CustomerStatus { get; set; }
 }

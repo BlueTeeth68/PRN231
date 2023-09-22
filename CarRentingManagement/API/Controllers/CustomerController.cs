@@ -1,5 +1,6 @@
 ﻿using BusinessLogic.DTOs.Request.User;
 using BusinessLogic.DTOs.Response.User;
+using BusinessLogic.ErrorHandlers;
 using BusinessLogic.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
@@ -24,7 +25,7 @@ public class CustomerController : ControllerBase
         var returnCustomer = await _customerServices.RegisterAsync(request);
         if (returnCustomer == null)
         {
-            return BadRequest("Something wrong when register account.");
+            throw new BadRequestException("Something wrong when register account.");
         }
 
         return Ok(returnCustomer);
@@ -36,7 +37,7 @@ public class CustomerController : ControllerBase
         var returnCustomer = await _customerServices.LoginAsync(request);
         if (returnCustomer == null)
         {
-            return BadRequest("Incorrect email or password.");
+            throw new BadRequestException("Incorrect email or password.");
         }
 
         return Ok(returnCustomer);
@@ -48,7 +49,7 @@ public class CustomerController : ControllerBase
         var user = await _customerServices.GetByIdAsync(id);
         if (user == null)
         {
-            return NotFound($"User {id} does not exist.");
+            throw new NotFoundException($"User {id} does not exist.");
         }
 
         return Ok(user);
@@ -61,14 +62,14 @@ public class CustomerController : ControllerBase
             return Ok(await _customerServices.GetAllAsync());
         return Ok(await _customerServices.GetByNameAscAsync(name));
     }
-    
+
     [HttpPut("{id}")]
     public async Task<ActionResult> UpdateAsync(int id, [FromBody] UpdateUserRequest request)
     {
         var result = await _customerServices.UpdateAsync(id, request);
-        if (result < 0)
+        if (!result)
         {
-            return BadRequest("Error when update user. Recheck information.");
+            throw new BadRequestException("Error when update user. Recheck information.");
         }
 
         return Ok("Update success.");

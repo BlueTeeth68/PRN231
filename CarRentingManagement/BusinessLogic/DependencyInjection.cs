@@ -30,6 +30,8 @@ public static class DependencyInjection
         services.AddScoped<ICustomerServices, CustomerService>();
         services.AddScoped<IUnitOfWork, UnitOfWork>();
         services.AddScoped<ICarInformationService, CarInformationService>();
+        services.AddScoped<IManufacturerService, ManufacturerService>();
+        services.AddScoped<ISupplierService, SupplierService>();
 
         //Add Mapper
         services.AddAutoMapper(typeof(UserMappingProfile));

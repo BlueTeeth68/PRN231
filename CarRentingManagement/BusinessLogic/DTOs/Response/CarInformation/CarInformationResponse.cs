@@ -14,6 +14,6 @@ public class CarInformationResponse
     public byte? CarStatus { get; set; }
     public decimal? CarRentingPricePerDay { get; set; }
 
-    public virtual Manufacturer Manufacturer { get; set; } = null!;
-    public virtual Supplier Supplier { get; set; } = null!;
+    public ManufacturerResponse Manufacturer { get; set; } = null!;
+    public SupplierResponse Supplier { get; set; } = null!;
 }

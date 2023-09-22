@@ -8,7 +8,7 @@ public interface ICarInformationService
 {
 
     public Task<CarInformationResponse?> GetByIdAsync(int id);
-    public Task<List<CarInformation>> GetAllAsync();
+    public Task<List<CarInformationResponse>> GetAllAsync();
     public Task<CarInformationResponse?> CreateNewAsync(CreateCarInformationRequest request);
     public Task<bool> UpdateAsync(int id, UpdateCarInformationRequest request);
     public Task<List<CarInformationResponse>> SearchByNameAsync(string name);

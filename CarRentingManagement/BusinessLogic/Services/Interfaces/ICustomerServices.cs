@@ -9,7 +9,7 @@ public interface ICustomerServices
     Task<UserResponse?> LoginAsync(LoginUserRequest request);
     Task<UserResponse?> GetByIdAsync(int id);
     Task<List<UserResponse>> GetAllAsync();
-    Task<int> UpdateAsync(int id, UpdateUserRequest request);
+    Task<bool> UpdateAsync(int id, UpdateUserRequest request);
     Task<bool> ChangePasswordAsync(int id, UpdatePasswordRequest request);
     Task<List<UserResponse>> GetByNameAscAsync(string name);
 }
