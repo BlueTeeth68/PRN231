@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using UI.Models;
@@ -20,18 +16,23 @@ namespace UI.Pages.RentingTransactions
 
         public IActionResult OnGet()
         {
-        ViewData["CustomerId"] = new SelectList(_context.Customers, "CustomerId", "CustomerId");
+            var email = HttpContext.Session.GetString("email");
+            if (email == null)
+            {
+               return RedirectToPage("/Login");
+            }
+
+            ViewData["CustomerId"] = new SelectList(_context.Customers, "CustomerId", "CustomerId");
             return Page();
         }
 
-        [BindProperty]
-        public RentingTransaction RentingTransaction { get; set; } = default!;
-        
+        [BindProperty] public RentingTransaction RentingTransaction { get; set; } = default!;
+
 
         // To protect from overposting attacks, see https://aka.ms/RazorPagesCRUD
         public async Task<IActionResult> OnPostAsync()
         {
-          if (!ModelState.IsValid || _context.RentingTransactions == null || RentingTransaction == null)
+            if (!ModelState.IsValid || _context.RentingTransactions == null || RentingTransaction == null)
             {
                 return Page();
             }

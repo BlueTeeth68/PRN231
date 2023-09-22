@@ -26,6 +26,12 @@ namespace UI.Pages.Customers
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
+            var email = HttpContext.Session.GetString("email");
+            if (email == null)
+            {
+               return RedirectToPage("/Login");
+            }
+
             if (id == null)
             {
                 return RedirectToPage("/Error", new

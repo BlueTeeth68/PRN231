@@ -1,0 +1,40 @@
+﻿@page
+@model UI.Pages.RegisterModel
+@{
+}
+
+<div class="container container-fluid w-50 m-auto mt-5 px-5 pt-4 pb-5">
+    <h2 class="text-center pb-2">Register</h2>
+
+    <form method="post">
+        <div class="form-group d-flex justify-content-between align-items-center my-3">
+            <label asp-for="Email" class="container-fluid w-25 text-start"></label>
+            <div class="w-75">
+                <input asp-for="Email" class="form-control container-fluid w-100" />
+                <span asp-validation-for="Email" class="text-danger"></span>
+            </div>
+            
+        </div>
+        
+        <div class="form-group d-flex justify-content-between align-items-center mb-3">
+            <label asp-for="Password" class="container-fluid w-25 text-start"></label>
+            <div class="w-75">
+                <input asp-for="Password" class="form-control container-fluid w-100" />
+                <span asp-validation-for="Password" class="text-danger"></span>
+            </div>
+        </div>
+        
+
+        @if (Model.ErrorMessage != null)
+        {
+            <p class="text-danger text-center">@Model.ErrorMessage</p>
+        }
+
+        <div class="d-flex justify-content-end align-items-center mt-4">
+            <div class="w-75">
+                <button type="submit" class="btn btn-primary w-25 ">Login</button>
+            </div>
+        </div>
+
+    </form>
+</div>

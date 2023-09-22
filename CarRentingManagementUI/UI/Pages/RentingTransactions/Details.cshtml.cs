@@ -1,41 +1,47 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.EntityFrameworkCore;
-using UI.Models;
+using Newtonsoft.Json;
+using UI.ViewModels.Transaction;
 
 namespace UI.Pages.RentingTransactions
 {
     public class DetailsModel : PageModel
     {
-        private readonly UI.Models.FUCarRentingManagementContext _context;
+        private readonly HttpClient _httpClient;
 
-        public DetailsModel(UI.Models.FUCarRentingManagementContext context)
+        public DetailsModel(HttpClient httpClient)
         {
-            _context = context;
+            _httpClient = httpClient;
         }
 
-      public RentingTransaction RentingTransaction { get; set; } = default!; 
+        public RentingReponse RentingTransaction { get; set; } = default!;
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
-            if (id == null || _context.RentingTransactions == null)
+            var email = HttpContext.Session.GetString("email");
+            if (email == null)
             {
-                return NotFound();
+               return RedirectToPage("/Login");
             }
 
-            var rentingtransaction = await _context.RentingTransactions.FirstOrDefaultAsync(m => m.RentingTransationId == id);
-            if (rentingtransaction == null)
+            if (id == null)
             {
-                return NotFound();
+                return RedirectToPage("/Error", new
+                {
+                    message = "Id is missing.",
+                    title = "Bad Request."
+                });
             }
-            else 
+
+            var response = await _httpClient.GetAsync($"https://localhost:7214/api/transactions/{id}");
+
+            if (response.IsSuccessStatusCode)
             {
-                RentingTransaction = rentingtransaction;
+                var content = await response.Content.ReadAsStringAsync();
+                RentingTransaction = JsonConvert.DeserializeObject<RentingReponse>(content);
+                return Page();
             }
+
             return Page();
         }
     }

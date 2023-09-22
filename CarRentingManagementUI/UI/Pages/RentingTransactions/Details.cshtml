@@ -9,7 +9,7 @@
 
 <div>
     <h4>RentingTransaction</h4>
-    <hr />
+    <hr/>
     <dl class="row">
         <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.RentingTransaction.RentingDate)
@@ -37,7 +37,48 @@
         </dd>
     </dl>
 </div>
+<hr/>
+
+<table class="table">
+    <thead>
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.RentingTransaction.RentingDetails.First().StartDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.RentingTransaction.RentingDetails.First().EndDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.RentingTransaction.RentingDetails.First().Price)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.RentingTransaction.RentingDetails.First().Car)
+        </th>
+    </tr>
+    </thead>
+    <tbody>
+    @if (Model.RentingTransaction?.RentingDetails != null)
+    {
+        @foreach (var item in Model.RentingTransaction.RentingDetails)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.StartDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.EndDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Price)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Car.CarId)
+                </td>
+            </tr>
+        }
+    }
+    </tbody>
+</table>
 <div>
-    <a asp-page="./Edit" asp-route-id="@Model.RentingTransaction?.RentingTransationId">Edit</a> |
     <a asp-page="./Index">Back to List</a>
 </div>

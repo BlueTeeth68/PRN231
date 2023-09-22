@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace API.Controllers;
 
 [ApiController]
-[Route("api/supplier")]
+[Route("api/suppliers")]
 public class SupplierController
 {
     private readonly ISupplierService _supplierService;

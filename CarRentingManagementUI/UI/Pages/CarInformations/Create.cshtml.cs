@@ -25,6 +25,12 @@ namespace UI.Pages.CarInformations
 
         public async Task<ActionResult> OnGet()
         {
+            var email = HttpContext.Session.GetString("email");
+            if (email == null)
+            {
+               return RedirectToPage("/Login");
+            }
+
             var getManufacturersTask = GetAllManufacturerAsync();
             var getSupplierTask = GetAllSupplierAsync();
             await Task.WhenAny(getManufacturersTask, getSupplierTask);
@@ -104,7 +110,7 @@ namespace UI.Pages.CarInformations
 
         private async Task<ActionResult<List<SupplierResponse>>> GetAllSupplierAsync()
         {
-            var response = await _httpClient.GetAsync($"https://localhost:7214/api/supplier");
+            var response = await _httpClient.GetAsync($"https://localhost:7214/api/suppliers");
             if (response.IsSuccessStatusCode)
             {
                 var content = await response.Content.ReadAsStringAsync();

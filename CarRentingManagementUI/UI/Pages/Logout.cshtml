@@ -1,0 +1,6 @@
+﻿@page
+@model UI.Pages.LogoutModel
+@{
+    HttpContext.Session.Clear();
+    Response.Redirect("/Login");
+}

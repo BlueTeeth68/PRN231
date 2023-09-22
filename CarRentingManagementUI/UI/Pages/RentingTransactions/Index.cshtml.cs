@@ -1,27 +1,41 @@
-﻿using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.EntityFrameworkCore;
-using UI.Models;
+﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.RazorPages;
+using Newtonsoft.Json;
+using UI.ViewModels.Transaction;
 
 namespace UI.Pages.RentingTransactions
 {
     public class IndexModel : PageModel
     {
-        private readonly UI.Models.FUCarRentingManagementContext _context;
+        private readonly HttpClient _httpClient;
 
-        public IndexModel(UI.Models.FUCarRentingManagementContext context)
+        public IndexModel(HttpClient httpClient)
         {
-            _context = context;
+            _httpClient = httpClient;
         }
 
-        public IList<RentingTransaction> RentingTransaction { get;set; } = default!;
+        public IList<RentingReponse> RentingTransaction { get; set; } = new List<RentingReponse>();
 
-        public async Task OnGetAsync()
+        public async Task<ActionResult> OnGetAsync()
         {
-            if (_context.RentingTransactions != null)
+            
+            var email =  HttpContext.Session.GetString("email");
+            if (email == null)
             {
-                RentingTransaction = await _context.RentingTransactions
-                .Include(r => r.Customer).ToListAsync();
+               return RedirectToPage("/Login");
             }
+            var response = await _httpClient.GetAsync("https://localhost:7214/api/transactions");
+            if (response.IsSuccessStatusCode)
+            {
+                var content = await response.Content.ReadAsStringAsync();
+                RentingTransaction = JsonConvert.DeserializeObject<List<RentingReponse>>(content);
+            }
+            else
+            {
+                RentingTransaction = new List<RentingReponse>();
+            }
+
+            return Page();
         }
     }
 }

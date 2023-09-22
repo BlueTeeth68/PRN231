@@ -16,7 +16,7 @@ public static class DependencyInjection
     public static IServiceCollection AddDependency(this IServiceCollection services, string? connectionString)
     {
         //Add Db context
-        services.AddDbContext<AppDbContext>(opt => opt.UseSqlServer(connectionString?? ""));
+        services.AddDbContext<AppDbContext>(opt => opt.UseSqlServer(connectionString ?? ""));
 
         //Add Repository
         services.AddScoped<ICarInformationRepository, CarInformationRepository>();
@@ -32,6 +32,7 @@ public static class DependencyInjection
         services.AddScoped<ICarInformationService, CarInformationService>();
         services.AddScoped<IManufacturerService, ManufacturerService>();
         services.AddScoped<ISupplierService, SupplierService>();
+        services.AddScoped<ITransactionService, TransactionService>();
 
         //Add Mapper
         services.AddAutoMapper(typeof(UserMappingProfile));

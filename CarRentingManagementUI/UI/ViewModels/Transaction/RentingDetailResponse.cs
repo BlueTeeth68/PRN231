@@ -1,6 +1,6 @@
-﻿using BusinessLogic.DTOs.Response.CarInformation;
+﻿using UI.ViewModels.CarInformation;
 
-namespace BusinessLogic.DTOs.Response.Transaction;
+namespace UI.ViewModels.Transaction;
 
 public class RentingDetailResponse
 {

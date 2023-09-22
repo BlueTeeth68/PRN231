@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc.RazorPages;
+﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.RazorPages;
 using Newtonsoft.Json;
 using UI.ViewModels.Users;
 
@@ -15,8 +16,14 @@ namespace UI.Pages.Customers
 
         public IList<UserResponse>? Users { get; set; } = new List<UserResponse>();
 
-        public async Task OnGetAsync()
+        public async Task<ActionResult> OnGetAsync()
         {
+            var email = HttpContext.Session.GetString("email");
+            if (email == null)
+            {
+               return RedirectToPage("/Login");
+            }
+            
             var response = await _httpClient.GetAsync("https://localhost:7214/api/customers");
             if (response.IsSuccessStatusCode)
             {
@@ -27,6 +34,8 @@ namespace UI.Pages.Customers
             {
                 Users = new List<UserResponse>();
             }
+
+            return Page();
         }
         
     }

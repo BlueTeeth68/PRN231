@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace DataAccess.Models
+﻿namespace DataAccess.Models
 {
     public partial class RentingDetail
     {
@@ -11,7 +8,7 @@ namespace DataAccess.Models
         public DateTime EndDate { get; set; }
         public decimal? Price { get; set; }
 
-        public virtual CarInformation Car { get; set; } = null!;
+        public CarInformation Car { get; set; } = null!;
         public virtual RentingTransaction RentingTransaction { get; set; } = null!;
     }
 }

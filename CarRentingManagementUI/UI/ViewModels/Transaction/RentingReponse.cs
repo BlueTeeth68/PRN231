@@ -1,8 +1,8 @@
-﻿using BusinessLogic.DTOs.Response.User;
+﻿using UI.ViewModels.Users;
 
-namespace BusinessLogic.DTOs.Response.Transaction;
+namespace UI.ViewModels.Transaction;
 
-public class RentingResponse
+public class RentingReponse
 {
     public int RentingTransationId { get; set; }
     public string? RentingDate { get; set; }
