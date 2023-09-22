@@ -16,6 +16,8 @@ public class CarInformationRepository : BaseRepository<CarInformation>, ICarInfo
     {
         var nameNormalize = name.Trim().ToLower();
         var result = await _dbSet.Where(c => c.CarName.ToLower().Contains(nameNormalize))
+            .Include(c => c.Manufacturer)
+            .Include(c => c.Supplier)
             .OrderBy(c => c.CarName).ToListAsync();
         return result;
     }
@@ -25,5 +27,17 @@ public class CarInformationRepository : BaseRepository<CarInformation>, ICarInfo
         return await _dbSet.Include(c => c.Manufacturer)
             .Include(c => c.Supplier)
             .ToListAsync();
+    }
+
+    public async Task<CarInformation?> GetByIdAsync(object id)
+    {
+        if (id is int intId)
+        {
+            return await _dbSet.Include(c => c.Supplier)
+                .Include(c => c.Manufacturer)
+                .FirstOrDefaultAsync(c => c.CarId.Equals(intId));
+        }
+
+        return null;
     }
 }
