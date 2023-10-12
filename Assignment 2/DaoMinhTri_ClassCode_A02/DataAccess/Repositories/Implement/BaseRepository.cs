@@ -36,9 +36,16 @@ public class BaseRepository<TEntity> : IBaseRepository<TEntity> where TEntity : 
         return result;
     }
 
-    public async Task<List<TEntity>> GetAllAsync()
+    public async Task<List<TEntity>> GetAllAsync(string includeProperties = "")
     {
-        return await _dbSet.ToListAsync();
+        IQueryable<TEntity> query = _dbSet;
+        foreach (var includeProperty in includeProperties.Split
+                     (new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries))
+        {
+            query = query.Include(includeProperty);
+        }
+
+        return await query.ToListAsync();
     }
 
 

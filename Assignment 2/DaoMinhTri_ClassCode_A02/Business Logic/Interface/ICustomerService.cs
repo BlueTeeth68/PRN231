@@ -11,4 +11,5 @@ public interface ICustomerService
     Task<CustomerDto> CreateAsync(Customer customer);
     Task<CustomerDto> LoginAsync(string email, string password);
     Task<CustomerDto> RegisterAsync(CreateCustomerDto customer);
+    Task<CustomerDto> UpdateAsync(int id, UpdateCustomerDto dto);
 }

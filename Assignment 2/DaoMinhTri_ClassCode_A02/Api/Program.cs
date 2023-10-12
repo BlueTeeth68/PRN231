@@ -17,9 +17,11 @@ modelBuilder.EntitySet<CarRental>("CarRentals");
 modelBuilder.EntitySet<Customer>("Customers");
 modelBuilder.EntitySet<Review>("Reviews");
 
-builder.Services.AddControllers().AddOData(options => options.Select().Filter().OrderBy().Expand().Count()
-    .SetMaxTop(100)
-    .AddRouteComponents("odata", modelBuilder.GetEdmModel()));
+builder.Services.AddControllers().AddOData(
+    options => options.Select().Filter().OrderBy().Expand().Count().SetMaxTop(100).AddRouteComponents(
+        "odata",
+        modelBuilder.GetEdmModel()));
+
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();

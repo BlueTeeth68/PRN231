@@ -6,7 +6,7 @@ public interface IBaseRepository<TEntity> where TEntity : BaseEntity
 {
     Task<TEntity?> GetByIdAsync(int id, string includeProperties = "", bool disableTracking = true);
 
-    Task<List<TEntity>> GetAllAsync();
+    Task<List<TEntity>> GetAllAsync(string includeProperties = "");
 
     Task<TEntity?> AddAsync(TEntity entity);
 

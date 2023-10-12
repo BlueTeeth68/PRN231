@@ -19,7 +19,7 @@ public class CustomerService : ICustomerService
 
     public async Task<CustomerDto> GetByIdAsync(int id)
     {
-        return await _repo.GetByIdAsync(id).ContinueWith(
+        return await _repo.GetByIdAsync(id, disableTracking: true).ContinueWith(
             t => t.Result != null
                 ? CustomerMapper.ToDto(t.Result)
                 : throw new NotFoundException($"Customer {id} does not exist."));
@@ -33,10 +33,12 @@ public class CustomerService : ICustomerService
 
     public async Task<CustomerDto> CreateAsync(Customer customer)
     {
-        return await _repo.AddAsync(customer).ContinueWith(
+        var result = await _repo.AddAsync(customer).ContinueWith(
             t => t.Result != null
                 ? CustomerMapper.ToDto(t.Result)
                 : throw new BadRequestException("Error when create customer."));
+        await _repo.SaveChangeAsync();
+        return result;
     }
 
     public async Task<CustomerDto> LoginAsync(string email, string password)
@@ -57,8 +59,19 @@ public class CustomerService : ICustomerService
 
         var createCustomer = CustomerMapper.ToEntity(customer);
 
-        return await _repo.AddAsync(createCustomer)
+        var result = await _repo.AddAsync(createCustomer)
             .ContinueWith(t =>
                 t.Result != null ? CustomerMapper.ToDto(t.Result) : throw new BadRequestException("Can not register."));
+        await _repo.SaveChangeAsync();
+        return result;
+    }
+
+    public async Task<CustomerDto> UpdateAsync(int id, UpdateCustomerDto dto)
+    {
+        var entity = await _repo.GetByIdAsync(id)
+            .ContinueWith(t => t.Result ?? throw new NotFoundException($"Customer {id} does not exist."));
+        CustomerMapper.UpdateCustomerToEntity(dto, ref entity);
+        await _repo.SaveChangeAsync();
+        return CustomerMapper.ToDto(entity);
     }
 }

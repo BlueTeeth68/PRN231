@@ -1,6 +1,7 @@
 ﻿using Business_Logic.Dto.Request;
 using Business_Logic.Dto.Response;
 using DataAccess.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace Business_Logic.Mapper;
 
@@ -35,5 +36,37 @@ public static class CustomerMapper
             Password = dto.Password
         };
     }
-    
+
+    public static void UpdateCustomerToEntity(UpdateCustomerDto dto, ref Customer entity)
+    {
+        if (!string.IsNullOrEmpty(dto.CustomerName))
+        {
+            entity.CustomerName = dto.CustomerName;
+        }
+
+        if (!string.IsNullOrEmpty(dto.Mobile))
+        {
+            entity.Mobile = dto.Mobile;
+        }
+
+        if (dto.Birthday.HasValue)
+        {
+            entity.Birthday = dto.Birthday.Value;
+        }
+
+        if (!string.IsNullOrEmpty(dto.IdentityCard))
+        {
+            entity.IdentityCard = dto.IdentityCard;
+        }
+
+        if (!string.IsNullOrEmpty(dto.LicenceNumber))
+        {
+            entity.LicenceNumber = dto.LicenceNumber;
+        }
+
+        if (dto.LicenceDate.HasValue)
+        {
+            entity.LicenceDate = dto.LicenceDate.Value;
+        }
+    }
 }
