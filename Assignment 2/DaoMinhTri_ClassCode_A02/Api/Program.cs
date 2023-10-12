@@ -1,11 +1,29 @@
+using Api;
+using DataAccess.Enum;
+using DataAccess.Models;
+using Microsoft.AspNetCore.OData;
+using Microsoft.OData.ModelBuilder;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
-builder.Services.AddControllers();
+var modelBuilder = new ODataConventionModelBuilder();
+modelBuilder.EnumType<CarStatus>();
+modelBuilder.EnumType<RentingStatus>();
+modelBuilder.EntitySet<Car>("Cars");
+modelBuilder.EntitySet<CarProducer>("CarProducers");
+modelBuilder.EntitySet<CarRental>("CarRentals");
+modelBuilder.EntitySet<Customer>("Customers");
+modelBuilder.EntitySet<Review>("Reviews");
+
+builder.Services.AddControllers().AddOData(options => options.Select().Filter().OrderBy().Expand().Count()
+    .SetMaxTop(100)
+    .AddRouteComponents("odata", modelBuilder.GetEdmModel()));
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+builder.Services.AddDependency();
 
 var app = builder.Build();
 
@@ -16,10 +34,11 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-app.UseHttpsRedirection();
+// app.UseHttpsRedirection();
 
+app.UseRouting();
 app.UseAuthorization();
+app.UseEndpoints(endpoints => endpoints.MapControllers());
 
-app.MapControllers();
 
 app.Run();
