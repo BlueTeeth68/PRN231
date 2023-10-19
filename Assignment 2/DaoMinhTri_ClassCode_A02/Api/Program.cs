@@ -1,4 +1,6 @@
+using System.Globalization;
 using Api;
+using Api.Middlewares;
 using DataAccess.Enum;
 using DataAccess.Models;
 using Microsoft.AspNetCore.OData;
@@ -40,7 +42,6 @@ if (app.Environment.IsDevelopment())
 
 app.UseRouting();
 app.UseAuthorization();
+app.UseMiddleware<GlobalExceptionMiddleware>();
 app.UseEndpoints(endpoints => endpoints.MapControllers());
-
-
 app.Run();

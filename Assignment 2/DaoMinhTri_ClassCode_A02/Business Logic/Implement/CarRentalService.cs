@@ -1,10 +1,11 @@
 ﻿using Business_Logic.Dto.Request;
 using Business_Logic.ExceptionHandler;
+using Business_Logic.Interface;
 using DataAccess.Enum;
 using DataAccess.Models;
 using DataAccess.Repositories.Interface;
 
-namespace Business_Logic.Interface;
+namespace Business_Logic.Implement;
 
 public class CarRentalService : ICarRentalService
 {
