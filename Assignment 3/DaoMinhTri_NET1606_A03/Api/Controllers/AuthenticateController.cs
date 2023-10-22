@@ -1,12 +1,14 @@
 ﻿using BusinessLogic.Dto.Request;
 using BusinessLogic.Dto.Response;
 using BusinessLogic.Interface;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [AllowAnonymous]
     public class AuthenticateController : ControllerBase
     {
         private readonly ICustomerService _customerService;

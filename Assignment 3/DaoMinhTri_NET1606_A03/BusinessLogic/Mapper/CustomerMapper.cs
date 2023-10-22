@@ -44,5 +44,25 @@ namespace BusinessLogic.Mapper
                 Token = ""
             };
         }
+
+        public static void FromUpdateDtoToEntity(UpdateCustomerDto dto, ref Customer entity)
+        {
+            if (!string.IsNullOrEmpty(dto.CustomerName))
+            {
+                entity.CustomerName = dto.CustomerName;
+            }
+
+            if (!string.IsNullOrEmpty(dto.Telephone))
+            {
+                entity.Telephone = dto.Telephone;
+            }
+
+            if (dto.CustomerBirthday.HasValue)
+            {
+                var now = DateTime.Now;
+                if (dto.CustomerBirthday.Value.Year <= now.Year - 10)
+                    entity.CustomerBirthday = dto.CustomerBirthday.Value;
+            }
+        }
     }
 }
