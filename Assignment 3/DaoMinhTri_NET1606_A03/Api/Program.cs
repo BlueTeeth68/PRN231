@@ -1,11 +1,22 @@
+using Api;
+using Api.Middlewares;
+using BusinessLogic;
+
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
-
-builder.Services.AddControllers();
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
-builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+//Add dependency injection
+var configuration = builder.Configuration.Get<AppConfiguration>();
+if (configuration != null)
+{
+    configuration.JwtKey = builder.Configuration["JwtSettings:Key"];
+    configuration.Issuer = builder.Configuration["JwtSettings:Issuer"];
+    configuration.Audience = builder.Configuration["JwtSettings:Audience"];
+    configuration.AdminEmail = builder.Configuration["Admin:Email"];
+    configuration.AdminPassword = builder.Configuration["Admin:Password"];
+    builder.Services.AddApiConfiguration(configuration.JwtKey, configuration.Issuer, configuration.Audience);
+    builder.Services.AddDependency();
+    builder.Services.AddSingleton(configuration);
+}
 
 var app = builder.Build();
 
@@ -13,12 +24,16 @@ var app = builder.Build();
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
-    app.UseSwaggerUI();
+    app.UseSwaggerUI(o => { o.SwaggerEndpoint("/swagger/v1/swagger.json", "Fu Renting system V1"); });
 }
 
-app.UseHttpsRedirection();
+app.UseCors("_publicPolicy");
+
+app.UseAuthentication();
 
 app.UseAuthorization();
+
+app.UseMiddleware<GlobalExceptionMiddleware>();
 
 app.MapControllers();
 

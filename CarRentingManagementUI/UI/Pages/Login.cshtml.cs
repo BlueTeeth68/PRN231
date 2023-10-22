@@ -26,8 +26,7 @@ namespace UI.Pages
         [BindProperty]
         [Required(ErrorMessage = "Password can not be empty.")]
         [DataType(DataType.Password)]
-        [StringLength(20, MinimumLength = 4,
-            ErrorMessage = "Password must not less than 4 character and can not exceed 20 character")]
+      
         public string Password { get; set; } = null!;
 
         public void OnGet()

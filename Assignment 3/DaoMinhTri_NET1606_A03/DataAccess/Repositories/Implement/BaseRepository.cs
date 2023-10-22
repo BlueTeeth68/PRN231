@@ -2,6 +2,8 @@
 using DataAccess.Repositories.Interface;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
+using System.Linq;
+using System.Linq.Expressions;
 
 namespace DataAccess.Repositories.Implement;
 
@@ -64,5 +66,39 @@ public class BaseRepository<TEntity> : IBaseRepository<TEntity> where TEntity : 
     public async Task<int> SaveChangeAsync()
     {
         return await _context.SaveChangesAsync();
+    }
+
+    public async Task<IEnumerable<TEntity>> GetAsync(Expression<Func<TEntity, bool>>? filter, Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>>? orderBy, string includeProperties, bool disableTracking = false)
+    {
+        IQueryable<TEntity> query = _dbSet;
+
+        try
+        {
+            if (disableTracking)
+            {
+                query = query.AsNoTracking();
+            }
+
+            if (filter != null)
+            {
+                query = query.Where(filter);
+            }
+
+            query = includeProperties.Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries)
+                .Aggregate(query, (current, includeProperty) => current.Include(includeProperty));
+
+            if (orderBy != null)
+            {
+                return await orderBy(query).ToListAsync();
+            }
+            else
+            {
+                return await query.ToListAsync();
+            }
+        }
+        catch (Exception e)
+        {
+            throw new Exception($"{e.Message}");
+        }
     }
 }

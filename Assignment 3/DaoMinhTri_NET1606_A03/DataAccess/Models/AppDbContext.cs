@@ -32,7 +32,8 @@ namespace DataAccess.Models
                 .SetBasePath(Directory.GetCurrentDirectory())
                 .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true);
             IConfiguration configuration = builder.Build();
-            return configuration.GetConnectionString("DefaultConnection");
+            var result = configuration.GetConnectionString("DefaultConnection");
+            return result;
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

@@ -28,4 +28,5 @@ public class CustomerRepository : BaseRepository<Customer>, ICustomerRepository
         var normalizeEmail = email.Trim().ToLower();
         return await _dbSet.FirstOrDefaultAsync(c => c.Email.ToLower().Equals(normalizeEmail));
     }
+
 }
