@@ -1,4 +1,4 @@
-﻿namespace BusinessLogic.Dto.Response
+﻿namespace BusinessLogic.Dto.Response.Customers
 {
     public class CustomerDto
     {

@@ -1,5 +1,7 @@
 ﻿using BusinessLogic.Dto.Request;
+using BusinessLogic.Dto.Request.Customers;
 using BusinessLogic.Dto.Response;
+using BusinessLogic.Dto.Response.Customers;
 using DataAccess.Models;
 
 namespace BusinessLogic.Mapper

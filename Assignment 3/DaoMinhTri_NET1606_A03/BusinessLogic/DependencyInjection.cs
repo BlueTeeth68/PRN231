@@ -27,6 +27,7 @@ namespace BusinessLogic
             //Add Services
             services.AddScoped<ICustomerService, CustomerService>();
             services.AddScoped<IJwtService, JwtService>();
+            services.AddScoped<ICarService, CarService>();
 
             return services;
         }

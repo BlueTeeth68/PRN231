@@ -1,6 +1,7 @@
 using Api;
 using Api.Middlewares;
 using BusinessLogic;
+using Microsoft.AspNetCore.OData;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -31,10 +32,14 @@ app.UseCors("_publicPolicy");
 
 app.UseAuthentication();
 
+app.UseODataRouteDebug();
+app.UseRouting();
 app.UseAuthorization();
+app.UseEndpoints(endpoints => endpoints.MapControllers());
 
 app.UseMiddleware<GlobalExceptionMiddleware>();
 
 app.MapControllers();
+
 
 app.Run();

@@ -9,6 +9,8 @@ public interface IBaseRepository<TEntity> where TEntity : class
 
     Task<List<TEntity>> GetAllAsync(string includeProperties = "");
 
+    IQueryable<TEntity> GetAllOdataAsync();
+
     Task<IEnumerable<TEntity>> GetAsync(
         Expression<Func<TEntity, bool>>? filter,
         Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>>? orderBy,

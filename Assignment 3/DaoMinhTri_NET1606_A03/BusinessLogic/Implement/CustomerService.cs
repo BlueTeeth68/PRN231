@@ -1,7 +1,9 @@
 ﻿using Application;
 using Business_Logic.ExceptionHandler;
 using BusinessLogic.Dto.Request;
+using BusinessLogic.Dto.Request.Customers;
 using BusinessLogic.Dto.Response;
+using BusinessLogic.Dto.Response.Customers;
 using BusinessLogic.Interface;
 using BusinessLogic.Mapper;
 using DataAccess.Models;

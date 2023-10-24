@@ -36,6 +36,11 @@ public class BaseRepository<TEntity> : IBaseRepository<TEntity> where TEntity : 
         return await query.ToListAsync();
     }
 
+    public IQueryable<TEntity> GetAllOdataAsync()
+    {
+        return _dbSet.AsQueryable();
+    }
+
 
     public async Task<TEntity?> AddAsync(TEntity entity)
     {

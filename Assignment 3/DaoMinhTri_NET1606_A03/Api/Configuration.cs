@@ -3,6 +3,7 @@ using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using System.Text;
 using BusinessLogic.Dto.Response;
+using BusinessLogic.Dto.Response.Customers;
 using DataAccess.Models;
 using Microsoft.AspNetCore.OData;
 using Microsoft.OData.ModelBuilder;
@@ -18,6 +19,8 @@ namespace Api
             var modelBuilder = new ODataConventionModelBuilder();
             modelBuilder.EntitySet<Supplier>("Suppliers");
             modelBuilder.EntitySet<Manufacturer>("Manufacturers");
+            modelBuilder.EntitySet<CarInformation>("Cars")
+                .EntityType.HasKey(c => c.CarId);
              modelBuilder.EntitySet<RentingTransaction>("RentingTransactions")
                  .EntityType.HasKey(rt => rt.RentingTransationId);
             modelBuilder.EntitySet<CustomerDto>("Customers")

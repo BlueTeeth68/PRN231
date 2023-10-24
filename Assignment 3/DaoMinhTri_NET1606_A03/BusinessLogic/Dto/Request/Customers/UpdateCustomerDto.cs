@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace BusinessLogic.Dto.Request;
+namespace BusinessLogic.Dto.Request.Customers;
 
 public class UpdateCustomerDto
 {
