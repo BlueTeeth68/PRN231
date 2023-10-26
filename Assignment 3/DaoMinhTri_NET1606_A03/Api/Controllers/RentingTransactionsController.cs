@@ -32,4 +32,11 @@ public class RentingTransactionsController : ODataController
     {
         return Ok(await _transactionService.CreateTransactionAsync(request));
     }
+
+    [HttpGet("/account/history")]
+    [Authorize]
+    public async Task<ActionResult<List<RentingTransaction>>> GetHistoryAsync()
+    {
+        return Ok(await _transactionService.ViewHistoryAsync());
+    }
 }

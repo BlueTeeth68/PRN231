@@ -1,5 +1,4 @@
 ﻿using System.Net;
-using Business_Logic.ExceptionHandler;
 using BusinessLogic.ExceptionHandler;
 
 namespace Api.Middlewares;

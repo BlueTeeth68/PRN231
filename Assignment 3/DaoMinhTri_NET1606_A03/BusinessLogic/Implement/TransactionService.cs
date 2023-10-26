@@ -1,7 +1,7 @@
 ﻿using System.Transactions;
 using Application;
-using Business_Logic.ExceptionHandler;
 using BusinessLogic.Dto.Request.Renting;
+using BusinessLogic.ExceptionHandler;
 using BusinessLogic.Interface;
 using BusinessLogic.Mapper;
 using DataAccess.Models;
@@ -47,6 +47,16 @@ public class TransactionService : ITransactionService
             if (!await _unitOfWork.CarInformationRepository.ExistByIdAsync(dto.CarId))
                 throw new BadRequestException($"Car {dto.CarId} does not exist.");
 
+            var transaction = await _unitOfWork.RentingDetailRepository.GetAsync(
+                filter: t => (t.StartDate <= dto.StartDate && dto.StartDate <= t.EndDate)
+                             || (t.StartDate <= dto.EndDate && dto.EndDate <= t.EndDate),
+                orderBy: null,
+                includeProperties: "",
+                disableTracking: false
+            );
+            if (transaction.Any())
+                throw new BadRequestException("Overlap renting day.");
+
             if (dto.StartDate > dto.EndDate || dto.StartDate > DateTime.Now)
             {
                 throw new BadRequestException(
@@ -62,5 +72,19 @@ public class TransactionService : ITransactionService
             .ContinueWith(t => t.Result ?? throw new BadRequestException("Something wrong."));
         await _unitOfWork.SaveChangeAsync();
         return entity;
+    }
+
+    public async Task<List<RentingTransaction>> ViewHistoryAsync()
+    {
+        var currentUserId = _jwtService.GetCurrentUserId();
+        var currentUser = await _unitOfWork.CustomerRepository.GetByIdAsync(currentUserId)
+            .ContinueWith(t => t.Result ?? throw new UnauthorizedException("Can not extract customer from token."));
+
+        var result = await _unitOfWork.RentingTransactionRepository.GetAsync(
+            filter: rt => rt.CustomerId == currentUserId,
+            orderBy: q => q.OrderByDescending(rt => rt.RentingDate),
+            includeProperties: $"{nameof(RentingTransaction.RentingDetails)}",
+            disableTracking: true);
+        return result.ToList();
     }
 }

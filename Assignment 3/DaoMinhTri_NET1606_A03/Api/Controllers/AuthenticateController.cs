@@ -1,6 +1,4 @@
-﻿using BusinessLogic.Dto.Request;
-using BusinessLogic.Dto.Request.Customers;
-using BusinessLogic.Dto.Response;
+﻿using BusinessLogic.Dto.Request.Customers;
 using BusinessLogic.Dto.Response.Customers;
 using BusinessLogic.Interface;
 using Microsoft.AspNetCore.Authorization;

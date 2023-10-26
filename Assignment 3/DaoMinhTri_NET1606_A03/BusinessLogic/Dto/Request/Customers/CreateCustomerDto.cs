@@ -6,11 +6,12 @@ namespace BusinessLogic.Dto.Request.Customers
     {
         public string? CustomerName { get; set; }
         //Need to check regex
+        [Required(ErrorMessage = "Phone is required.")]
         public string? Telephone { get; set; }
-        
+
         [Required(ErrorMessage = "Email is required.")]
         [DataType(DataType.EmailAddress)]
-        public string Email { get; set; }
+        public string Email { get; set; } = string.Empty;
         
         [DataType(DataType.Date)]
         public DateTime? CustomerBirthday { get; set; }

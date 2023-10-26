@@ -1,0 +1,49 @@
+﻿@page
+@model LoginModel
+@{
+}
+
+<div class="container container-fluid w-50 m-auto mt-5 px-5 pt-4 pb-5">
+    <h2 class="text-center pb-2">Login</h2>
+
+    @if (Model.StatusCode != null)
+    {
+        <p class="text-danger text-start fw-bold">Status code: @Model.StatusCode</p>
+    }
+    @if (Model.ErrorMessage != null)
+    {
+        <p class="text-danger text-start fw-bold">@Model.ErrorMessage</p>
+    }
+
+
+    <form method="post">
+        <div class="form-group container my-3">
+            <div class="row">
+                <label asp-for="Credential.Email" class="container-fluid w-25 text-start col-md-4"></label>
+                <div class="col-md-8">
+                    <input asp-for="Credential.Email" class="form-control container-fluid w-100"/>
+                    <span asp-validation-for="Credential.Email" class="text-danger"></span>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="form-group container my-3">
+            <div class="row">
+                <label asp-for="Credential.Password" class="container-fluid w-25 text-start col-md-4"></label>
+                <div class="col-md-8">
+                    <input asp-for="Credential.Password" class="form-control container-fluid w-100"/>
+                    <span asp-validation-for="Credential.Password" class="text-danger"></span>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="d-flex justify-content-center align-items-center mt-4">
+
+            <button type="submit" class="btn btn-primary w-25 ">Login</button>
+
+        </div>
+
+    </form>
+</div>

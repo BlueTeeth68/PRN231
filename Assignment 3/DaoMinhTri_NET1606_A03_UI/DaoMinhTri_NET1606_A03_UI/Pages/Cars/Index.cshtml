@@ -1,0 +1,90 @@
+﻿@page
+@model DaoMinhTri_NET1606_A03_UI.Pages.Cars.IndexModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-page="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.CarInformation[0].CarName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CarInformation[0].CarDescription)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CarInformation[0].NumberOfDoors)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CarInformation[0].SeatingCapacity)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CarInformation[0].FuelType)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CarInformation[0].Year)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CarInformation[0].CarStatus)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CarInformation[0].CarRentingPricePerDay)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CarInformation[0].Manufacturer)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CarInformation[0].Supplier)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.CarInformation) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.CarName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CarDescription)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NumberOfDoors)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SeatingCapacity)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FuelType)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Year)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CarStatus)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CarRentingPricePerDay)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Manufacturer.ManufacturerId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Supplier.SupplierId)
+            </td>
+            <td>
+                <a asp-page="./Edit" asp-route-id="@item.CarId">Edit</a> |
+                <a asp-page="./Details" asp-route-id="@item.CarId">Details</a> |
+                <a asp-page="./Delete" asp-route-id="@item.CarId">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

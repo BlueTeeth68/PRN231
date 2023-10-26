@@ -1,0 +1,96 @@
+﻿@{
+    var fullName = Context.Request.HttpContext.Session.GetString("fullName");
+    var email = Context.Request.HttpContext.Session.GetString("email");
+    var isAdmin = email == "admin@FUCarRentingSystem.com";
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>FuCarManagement UI</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/DaoMinhTri_NET1606_A03_UI.styles.css" asp-append-version="true" />
+</head>
+<body>
+    <header>
+        @if (email == null)
+        {
+            <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark bg-dark text-light border-bottom box-shadow mb-3">
+                <div class="container">
+                    <a class="navbar-brand" asp-area="" asp-page="/Index">Car Renting Management</a>
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                            aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="navbar-collapse collapse d-sm-inline-flex justify-content-end">
+                        <div class="d-flex justify-content-end align-items-center">
+                            <a class="nav-link text-light" asp-area="" asp-page="/Login">Login</a>
+                            <a class="nav-link text-light" asp-area="" asp-page="/Register">Register</a>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+        }
+        else
+        {
+            <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark bg-dark text-light border-bottom box-shadow mb-3">
+                <div class="container">
+                    <a class="navbar-brand" asp-area="" asp-page="/Index">Car Renting Management</a>
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                            aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+    
+                        <ul class="navbar-nav d-flex justify-content-start">
+                            <li class="nav-item">
+                                <a class="nav-link text-light" asp-area="" asp-page="/RentingTransactions/Index">Renting Transaction</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-light" asp-area="" asp-page="/Cars/Index">Cars</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-light" asp-area="" asp-page="/Customers/Index">Customers</a>
+                            </li>
+                        </ul>
+    
+                        <div>
+                            <ul class="navbar-nav d-flex justify-content-start">
+                                <li class="nav-item">
+                                    <img src="https://e0.pxfuel.com/wallpapers/183/77/desktop-wallpaper-naruto-by-aggaton-f5-now-browse-millions-of-popular-anime-wa-in-2022-naruto-3d-naruto-best-naruto-naruto-super-saiyan.jpg" alt="Avatar" class="rounded-circle" width="40" height="40"/>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link text-light" asp-area="" asp-page="/Account/Index">@fullName</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link text-light" asp-area="" asp-page="/Logout">Log out</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+        }
+    </header>
+    <div class="container">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+
+    <footer class="border-top footer text-muted">
+        <div class="container">
+            &copy; 2023 - DaoMinhTri_NET1606_A03_UI - <a asp-area="" asp-page="/Privacy">Privacy</a>
+        </div>
+    </footer>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

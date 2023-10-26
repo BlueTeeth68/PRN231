@@ -1,7 +1,6 @@
-﻿using BusinessLogic.ExceptionHandler;
-using System.Net;
+﻿using System.Net;
 
-namespace Business_Logic.ExceptionHandler;
+namespace BusinessLogic.ExceptionHandler;
 
 public class BadRequestException : BaseException
 {

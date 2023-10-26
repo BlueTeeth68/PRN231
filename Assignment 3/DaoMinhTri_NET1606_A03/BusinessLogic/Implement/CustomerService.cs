@@ -1,9 +1,7 @@
 ﻿using Application;
-using Business_Logic.ExceptionHandler;
-using BusinessLogic.Dto.Request;
 using BusinessLogic.Dto.Request.Customers;
-using BusinessLogic.Dto.Response;
 using BusinessLogic.Dto.Response.Customers;
+using BusinessLogic.ExceptionHandler;
 using BusinessLogic.Interface;
 using BusinessLogic.Mapper;
 using DataAccess.Models;
@@ -31,7 +29,7 @@ namespace BusinessLogic.Implement
                 orderBy: null,
                 includeProperties: ""
             ).ContinueWith(
-                t => t.Result.First() ?? throw new UnauthorizedAccessException("Incorrect email or password"));
+                t => t.Result.FirstOrDefault() ?? throw new UnauthorizedException("Incorrect email or password"));
             var result = CustomerMapper.ToLoginDto(entity);
             result.Token = _jwtService.CreateAccessToken(entity);
             return result;

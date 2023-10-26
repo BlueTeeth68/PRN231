@@ -1,6 +1,6 @@
 ﻿using System.Text.Json;
 
-namespace Business_Logic.ExceptionHandler;
+namespace BusinessLogic.ExceptionHandler;
 
 public class ErrorDetail
 {

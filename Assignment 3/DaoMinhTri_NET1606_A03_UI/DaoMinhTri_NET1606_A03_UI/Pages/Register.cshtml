@@ -1,0 +1,81 @@
+﻿@page
+@model RegisterModel
+@{
+}
+
+<div class="container container-fluid w-50 m-auto mt-5 px-5 pt-4 pb-5">
+    <h2 class="text-center pb-2">Register</h2>
+
+    @if (Model.StatusCode != null)
+    {
+        <p class="text-danger text-start fw-bold">Status code: @Model.StatusCode</p>
+    }
+    @if (Model.ErrorMessage != null)
+    {
+        <p class="text-danger text-start fw-bold">@Model.ErrorMessage</p>
+    }
+
+
+    <form method="post">
+        <div class="form-group container my-3">
+            <div class="row">
+                <label asp-for="Customer.CustomerName" class="container-fluid w-25 text-start col-md-4"></label>
+                <div class="col-md-8">
+                    <input asp-for="Customer.CustomerName" class="form-control container-fluid w-100"/>
+                    <span asp-validation-for="Customer.CustomerName" class="text-danger"></span>
+                </div>
+            </div>
+
+        </div>
+        <div class="form-group container my-3">
+            <div class="row">
+                <label asp-for="Customer.Telephone" class="container-fluid w-25 text-start col-md-4"></label>
+                <div class="col-md-8">
+                    <input asp-for="Customer.Telephone" class="form-control container-fluid w-100" required="required"/>
+                    <span asp-validation-for="Customer.Telephone" class="text-danger"></span>
+                </div>
+            </div>
+        </div>
+        <div class="form-group container my-3">
+            <div class="row">
+                <label asp-for="Customer.Email" class="container-fluid w-25 text-start col-md-4"></label>
+                <div class="col-md-8">
+                    <input asp-for="Customer.Email" class="form-control container-fluid w-100" required="required"/>
+                    <span asp-validation-for="Customer.Email" class="text-danger"></span>
+                </div>
+            </div>
+
+        </div>
+        <div class="form-group my-3 container">
+            <div class="row">
+                <label asp-for="Customer.CustomerBirthday" class="container-fluid w-25 text-start col-md-4"></label>
+                <div class="col-md-8">
+
+                    @{
+                        var maxDate = new DateTime(DateTime.Now.Year - 10, 12, 31).Date.ToString("yyyy-MM-dd");
+
+                    }
+                    <input asp-for="Customer.CustomerBirthday" class="form-control container-fluid w-100" required="required"
+                           max="@maxDate"/>
+                    <span asp-validation-for="Customer.CustomerBirthday" class="text-danger"></span>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group container mb-3">
+            <div class="row">
+                <label asp-for="Customer.Password" class="container-fluid w-25 text-start col-md-4"></label>
+                <div class="col-md-8">
+                    <input asp-for="Customer.Password" class="form-control container-fluid w-100" required="required"/>
+                    <span asp-validation-for="Customer.Password" class="text-danger"></span>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="d-flex justify-content-center align-items-center mt-4">
+            <button type="submit" class="btn btn-primary w-25 ">Register</button>
+        </div>
+
+    </form>
+</div>

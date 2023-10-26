@@ -1,0 +1,80 @@
+﻿@page
+@model DaoMinhTri_NET1606_A03_UI.Pages.Cars.EditModel
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Edit</h1>
+
+<h4>CarInformation</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="CarInformation.CarId" />
+            <div class="form-group">
+                <label asp-for="CarInformation.CarName" class="control-label"></label>
+                <input asp-for="CarInformation.CarName" class="form-control" />
+                <span asp-validation-for="CarInformation.CarName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CarInformation.CarDescription" class="control-label"></label>
+                <input asp-for="CarInformation.CarDescription" class="form-control" />
+                <span asp-validation-for="CarInformation.CarDescription" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CarInformation.NumberOfDoors" class="control-label"></label>
+                <input asp-for="CarInformation.NumberOfDoors" class="form-control" />
+                <span asp-validation-for="CarInformation.NumberOfDoors" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CarInformation.SeatingCapacity" class="control-label"></label>
+                <input asp-for="CarInformation.SeatingCapacity" class="form-control" />
+                <span asp-validation-for="CarInformation.SeatingCapacity" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CarInformation.FuelType" class="control-label"></label>
+                <input asp-for="CarInformation.FuelType" class="form-control" />
+                <span asp-validation-for="CarInformation.FuelType" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CarInformation.Year" class="control-label"></label>
+                <input asp-for="CarInformation.Year" class="form-control" />
+                <span asp-validation-for="CarInformation.Year" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CarInformation.ManufacturerId" class="control-label"></label>
+                <select asp-for="CarInformation.ManufacturerId" class="form-control" asp-items="ViewBag.ManufacturerId"></select>
+                <span asp-validation-for="CarInformation.ManufacturerId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CarInformation.SupplierId" class="control-label"></label>
+                <select asp-for="CarInformation.SupplierId" class="form-control" asp-items="ViewBag.SupplierId"></select>
+                <span asp-validation-for="CarInformation.SupplierId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CarInformation.CarStatus" class="control-label"></label>
+                <input asp-for="CarInformation.CarStatus" class="form-control" />
+                <span asp-validation-for="CarInformation.CarStatus" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CarInformation.CarRentingPricePerDay" class="control-label"></label>
+                <input asp-for="CarInformation.CarRentingPricePerDay" class="form-control" />
+                <span asp-validation-for="CarInformation.CarRentingPricePerDay" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-page="./Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

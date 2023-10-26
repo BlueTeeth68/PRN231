@@ -26,8 +26,8 @@ namespace BusinessLogic.Mapper
             return new Customer
             {
                 CustomerBirthday = dto.CustomerBirthday,
-                CustomerName = dto.CustomerName ?? dto.Email,
-                Email = dto.Email,
+                CustomerName = dto.CustomerName?.Trim() ?? dto.Email.Trim(),
+                Email = dto.Email.Trim(),
                 Password = dto.Password,
                 CustomerStatus = 1,
                 Telephone = dto.Telephone

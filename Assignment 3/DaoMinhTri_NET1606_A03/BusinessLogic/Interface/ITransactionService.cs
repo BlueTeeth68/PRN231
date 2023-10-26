@@ -7,4 +7,6 @@ public interface ITransactionService
 {
     IQueryable<RentingTransaction> GetAll();
     Task<RentingTransaction> CreateTransactionAsync(List<RentingDetailDto> request);
+
+    Task<List<RentingTransaction>> ViewHistoryAsync();
 }
